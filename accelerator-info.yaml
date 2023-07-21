@@ -1,0 +1,51 @@
+id: 07fcb718-3361-4acc-98b7-09c160a31139
+timestamp: 2023-07-21T18:31:24Z
+username: tanzu-demo
+source: TAP-GUI
+accelerator:
+  name: streaming-app-template
+  git:
+    url: https://github.com/vmware-tanzu/application-accelerator-samples
+    subPath: streaming-app-template
+    ref:
+      branch: main
+    commit: de5c1f342e74b6268f02b1ac93a67cc948336a89
+fragments:
+  - name: build-wrapper-maven
+    git:
+      url: https://github.com/vmware-tanzu/application-accelerator-samples.git
+      subPath: fragments/build-wrapper-maven
+      ref:
+        branch: main
+      commit: de5c1f342e74b6268f02b1ac93a67cc948336a89
+  - name: live-update
+    git:
+      url: https://github.com/vmware-tanzu/application-accelerator-samples.git
+      subPath: fragments/live-update
+      ref:
+        branch: main
+      commit: de5c1f342e74b6268f02b1ac93a67cc948336a89
+  - name: tap-workload
+    git:
+      url: https://github.com/vmware-tanzu/application-accelerator-samples.git
+      subPath: fragments/tap-workload
+      ref:
+        branch: main
+      commit: de5c1f342e74b6268f02b1ac93a67cc948336a89
+options:
+  bsGitBranch: main
+  bsGitRepository: github.com?owner=tanzu-demo&repo=bar-processor
+  eventProcessRole: true
+  eventSinkRole: false
+  eventSourceRole: false
+  groupId: com.example
+  includeBuildToolWrapper: true
+  liveUpdateIDESupport: true
+  mainClassName: StreamApplication
+  msgBrokerName: stream-sample-message-broker
+  objectModelClassName: Foo
+  packageName: com.example.tanzu.streamtemplate
+  projectName: bar-processor
+  resultChannel: foo-result
+  sourceChannel: foo-source
+  sourceChannelGroup: foo-source-group

@@ -1,0 +1,32 @@
+apiVersion: carto.run/v1alpha1
+kind: Workload
+metadata:
+  name: bar-processor
+  labels:
+    apps.tanzu.vmware.com/workload-type: worker
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    app.kubernetes.io/part-of: bar-processor
+spec:
+  build:
+    env:
+    - name: BP_JVM_VERSION
+      value: "17"
+  resources:
+    requests:
+      memory: 500M
+      cpu: 100m
+    limits:
+      memory: 750M
+      cpu: "1.5"
+  serviceClaims:
+  - name: msgbroker
+    ref:
+      apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+      kind: ClassClaim
+      name: stream-sample-message-broker
+  source:
+    git:
+      url: https://github.com/tanzu-demo/bar-processor
+      ref:
+        branch: main
